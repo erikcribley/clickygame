@@ -46,14 +46,4 @@ const cats = [
   },
 ]
 
-// function List (props) {
-//   return (
-//     <div>
-//       {props.cats.map(item => (
-//         <img scr={item.image} key={item.id} alt="kitty kat"></img>
-//       ))}
-//     </div>
-//   )
-// }
-
 export default cats
