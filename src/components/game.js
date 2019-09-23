@@ -14,17 +14,23 @@ const shuffle = (array) => {
 }
 
 class Game extends React.Component {
-
   state = {
     clicked: false
+  } 
+
+  //change clicked in cats array of objects
+  handleClick = (event) => {
+    this.setState({
+      clicked: true,
+    })    
+
+    shuffle(cats)
+    console.log(cats)
   }
 
-  handleClick = () => {
-    this.setState({
-      clicked: true
-    })
-    shuffle(cats)
-  }
+  //reset
+
+  //send to header, adjust score
   
   render() {
     return (
