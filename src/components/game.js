@@ -1,5 +1,7 @@
 import React from 'react'
 import cats from './catpics'
+import Header from './header'
+import Body from './body'
 
 const shuffle = (array) => {
   let currentIndex = array.length, temporaryValue, randomIndex
@@ -15,26 +17,62 @@ const shuffle = (array) => {
 
 class Game extends React.Component {
   state = {
-    clicked: false
+    cats,
+    score: 0,
+    topScore: 0, 
+    prompt: 'Click a kitty to begin!'
   } 
 
-  //change clicked in cats array of objects
-  handleClick = (event) => {
+  reset = () => {
     this.setState({
-      clicked: true,
-    })    
-
-    shuffle(cats)
-    console.log(cats)
+      cats: shuffle(cats),
+      score: 0,
+      prompt: 'Bad kitty!'
+    })
   }
 
-  //reset
+  score = array => {
+    this.setState({
+      score: array.length
+    })
+  }
 
-  //send to header, adjust score
-  
+  topScore = () => {
+    if(this.state.score >= this.state.topScore) {
+      return this.setState({
+        topScore: this.state.score +1
+      })
+    }
+  }
+
+  update = id => {
+    return this.setState({
+      cats: shuffle(cats),
+      score: this.state.score + 1,
+      prompt: "Good Kitty!"
+    })
+  }
+
   render() {
     return (
-      cats.map(({id, src}) => <img key={id} src={src} alt ="kitty kat" onClick={this.handleClick} />)
+      <div className="App">
+        <Header
+          score={this.state.score} 
+          topScore={this.state.topScore} 
+          prompt={this.state.prompt} 
+        />
+        <p> Click on a kitty, but don't click the same kitty more than once! </p>
+        <div>
+          {this.state.cats.map(kitty => (
+            <Body
+              id = {kitty.id}
+              key = {kitty.id}
+              image = {kitty.src}
+              clicked = {kitty.clicked}
+            />
+          ))}
+        </div>
+      </div>
     )
   }
 }
