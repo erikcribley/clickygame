@@ -1,4 +1,4 @@
-const cats = [
+let cats = [
   {
     id: 1,
     src: './images/cat1.jpg',
