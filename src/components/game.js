@@ -29,11 +29,20 @@ class Game extends React.Component {
     return array
   }
 
+  topScore = () => {
+    if(this.state.score >= this.state.topScore) {
+      this.setState({
+        topScore: this.state.score +1
+      })
+    }
+  }
+
   update = (id) => {
     this.shuffle(cats)
     this.setState({
-      
+      score: this.state.score +1
     })
+    this.topScore()
   }
 
   render () {
@@ -69,20 +78,6 @@ export default Game
 //       score: 0,
 //       prompt: 'Bad kitty!'
 //     })
-//   }
-
-//   score = array => {
-//     this.setState({
-//       score: array.length
-//     })
-//   }
-
-//   topScore = () => {
-//     if(this.state.score >= this.state.topScore) {
-//       return this.setState({
-//         topScore: this.state.score +1
-//       })
-//     }
 //   }
 
 //   update = id => {
