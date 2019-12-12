@@ -5,7 +5,7 @@ import Body from './body'
 
 class Game extends React.Component {
   state = {
-    cats,
+    cats, 
     score: 0,
     topScore: 0,
     prompt: 'Click a kitty to begin!'
@@ -37,12 +37,36 @@ class Game extends React.Component {
     }
   }
 
-  update = (id) => {
-    this.shuffle(cats)
+  incrementScore = () => {
     this.setState({
-      score: this.state.score +1
+      score: this.state.score +1, 
+      prompt: "Good Kitty!"
     })
     this.topScore()
+  }
+
+  reset = () => {
+    this.setState({
+      prompt: "Bad Kitty!",
+      score: 0
+    })
+  }
+
+  update = (id, clicked) => {
+    this.setState(state => {
+      this.state.cats.map((kitty, i) => {
+        if (i === id && clicked === false) {
+          this.incrementScore()
+          this.setState({
+            clicked: true
+          })
+        } else if (i === id && clicked === true) {
+          this.reset()
+        }
+      return cats
+      })
+    })
+    this.shuffle(cats)
   }
 
   render () {
@@ -71,19 +95,3 @@ class Game extends React.Component {
 }
 
 export default Game
-
-//   reset = () => {
-//     this.setState({
-//       cats: shuffle(cats),
-//       score: 0,
-//       prompt: 'Bad kitty!'
-//     })
-//   }
-
-//   update = id => {
-//     return this.setState({
-//       cats: shuffle(cats),
-//       score: this.state.score + 1,
-//       prompt: "Good Kitty!"
-//     })
-//   }
