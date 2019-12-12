@@ -5,17 +5,16 @@ import Body from './body'
 
 class Game extends React.Component {
   state = {
-    cats, 
     score: 0,
     topScore: 0,
     prompt: 'Click a kitty to begin!'
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
       cats: this.shuffle(cats)
     })
-  }  
+  }
 
   shuffle = (array) => {
     let currentIndex = array.length, temporaryValue, randomIndex
@@ -38,34 +37,41 @@ class Game extends React.Component {
   }
 
   incrementScore = () => {
+    if (this.state.score === 8) {
+    this.setState({
+      score: this.state.score +1, 
+      prompt: "You Win!"
+    })
+    } else {
     this.setState({
       score: this.state.score +1, 
       prompt: "Good Kitty!"
     })
+    }
     this.topScore()
   }
 
   reset = () => {
     this.setState({
       prompt: "Bad Kitty!",
-      score: 0
+      score: 0,
+    })
+    cats.map((kitty) => {
+      kitty.clicked = false
+      return cats
     })
   }
 
-  update = (id, clicked) => {
-    this.setState(state => {
-      this.state.cats.map((kitty, i) => {
-        if (i === id && clicked === false) {
-          this.incrementScore()
-          this.setState({
-            clicked: true
-          })
-        } else if (i === id && clicked === true) {
-          this.reset()
-        }
+  update = (id) => {
+    cats.map((kitty) => {
+      if (id === kitty.id && kitty.clicked === false) {
+        this.incrementScore()
+        kitty.clicked = true
+      } else if (id === kitty.id && kitty.clicked === true) {
+        this.reset()
+      } 
       return cats
       })
-    })
     this.shuffle(cats)
   }
 
@@ -79,7 +85,7 @@ class Game extends React.Component {
         />
         <p> Click on a kitty, but don't click on the same kitty more than once! </p>
         <div>
-          {this.state.cats.map(kitty => (
+          {cats.map(kitty => (
             <Body
               id={kitty.id}
               key={kitty.id}
