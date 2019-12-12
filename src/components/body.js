@@ -3,7 +3,7 @@ import React from 'react'
 function Body (props) {
   return (
     <div>
-      <img src={props.src} alt="kitty kat" onClick={() => props.update(props.id, props.clicked)}/> 
+      <img src={props.src} alt="kitty kat" onClick={() => props.update(props.id)}/> 
     </div>
   )
 }

@@ -10,12 +10,6 @@ class Game extends React.Component {
     prompt: 'Click a kitty to begin!'
   }
 
-  componentDidMount() {
-    this.setState({
-      cats: this.shuffle(cats)
-    })
-  }
-
   shuffle = (array) => {
     let currentIndex = array.length, temporaryValue, randomIndex
     while (0 !== currentIndex) {
@@ -26,6 +20,12 @@ class Game extends React.Component {
       array[randomIndex] = temporaryValue
     }
     return array
+  }
+
+  componentDidMount() {
+    this.setState({
+      cats: this.shuffle(cats)
+    })
   }
 
   topScore = () => {
@@ -90,7 +90,6 @@ class Game extends React.Component {
               id={kitty.id}
               key={kitty.id}
               src={kitty.src}
-              clicked={kitty.clicked}
               update={this.update}
             />
           ))}
