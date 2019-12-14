@@ -2,6 +2,7 @@ import React from 'react'
 import cats from './catpics'
 import Header from './header'
 import Body from './body'
+import './style.css'
 
 class Game extends React.Component {
   state = {

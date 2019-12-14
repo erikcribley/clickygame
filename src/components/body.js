@@ -1,8 +1,9 @@
 import React from 'react'
+import './style.css'
 
 function Body (props) {
   return (
-    <div>
+    <div className="pics">
       <img src={props.src} alt="kitty kat" onClick={() => props.update(props.id)}/> 
     </div>
   )
